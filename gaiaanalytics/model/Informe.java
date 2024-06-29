@@ -9,6 +9,12 @@ public class Informe {
     private String contenido;
 
 
+    public Informe(int usuarioId, LocalDate fecha, String contenido) {
+        this.usuarioId = usuarioId;
+        this.fecha = fecha;
+        this.contenido = contenido;
+    }
+
     public Informe(int id, int usuarioId, String contenido) {
         this.id = id;
         this.usuarioId = usuarioId;

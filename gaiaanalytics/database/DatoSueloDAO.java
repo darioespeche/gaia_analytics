@@ -44,5 +44,35 @@ public class DatoSueloDAO {
         }
         return datosSuelo;
     }
+    //Añadiremos un método en DatoSueloDAO para verificar si un datoId existe.
+    public boolean datoIdExists(int datoId) {
+        String sql = "SELECT COUNT(*) FROM datos_suelo WHERE dato_id = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, datoId);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    public List<Integer> obtenerIdsDatosSuelo() {
+        List<Integer> ids = new ArrayList<>();
+        String sql = "SELECT dato_id FROM datos_suelo";
+        try (Connection conn = DatabaseConnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                ids.add(rs.getInt("dato_id"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ids;
+    }
+
 }
 

@@ -4,6 +4,10 @@ public abstract class Analisis {
     private int datoId;
     private String resultado;
 
+
+    public Analisis() {
+    }
+
     public Analisis(int datoId, String resultado) {
         this.datoId = datoId;
         this.resultado = resultado;
